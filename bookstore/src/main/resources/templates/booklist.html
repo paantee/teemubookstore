@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeLeaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>Book list</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" th:href="@{https://cdn.simplecss.org/simple.css}"/>
+</head>
+	<body>
+	<div>
+		<h1>Books</h1>
+	</div>
+	<div class="col-md-4">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+			
+		<table class="table table-striped">
+			<tr>
+				<th>Author</th>
+				<th></th>
+				<th>ISBN</th>
+				<th></th>
+				<th>Title</th>
+				<th></th>
+				<th>Year</th>
+				<th></th>
+				<th>Category</th>	
+				<th></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>	
+			</tr>
+				
+            <tr th:each="book : ${books}">
+            
+              	<td th:text="${book.author}"><td/>
+              	<td th:text="${book.isbn}"><td/>
+              	<td th:text="${book.title}"><td/>
+              	<td th:text="${book.year}"><td/>
+              	<td th:text="${book.category.name}"><td/>
+              		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+              		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+            </tr>
+            
+        </table>
+        	<a href="/add" class="btn btn-primary">Add Book</a>
+	</body>
+</html>
