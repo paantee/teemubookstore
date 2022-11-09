@@ -22,7 +22,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(BookRepository repository, CategoryRepository crepository) {return (args) -> {
+	public CommandLineRunner demo(BookRepository repository, CategoryRepository crepository, UserRepository urepository) {return (args) -> {
 		
 		crepository.save(new Category("category1"));
 		crepository.save(new Category("category2"));
@@ -32,10 +32,10 @@ public class BookstoreApplication {
 		repository.save(new Book("Janne", "a2", "Janne Testi", "2018", crepository.findByName("category2").get(0)));
 		repository.save(new Book("Aatu", "a3", "Aatu Testi", "2019", crepository.findByName("category1").get(0)));
 
-	//	User user1 = new User("user1", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
-	//	User user2 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
-	//	urepository.save(user1);
-	//	urepository.save(user2); 
+	User user1 = new User("user1", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
+		User user2 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
+		urepository.save(user1);
+		urepository.save(user2); 
 		
 	};
 	}
